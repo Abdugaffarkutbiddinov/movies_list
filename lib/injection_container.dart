@@ -22,6 +22,6 @@ init() {
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
-  sl.registerLazySingleton(() => http.Client);
+  sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }

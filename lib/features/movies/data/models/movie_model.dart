@@ -14,7 +14,7 @@ class MovieModel extends Movie {
       required String title,
       required String posterPath,
       required String releaseDate,
-      required double voteAverage,
+      required num voteAverage,
       required String overview})
       : super(
             id: id,
@@ -27,22 +27,21 @@ class MovieModel extends Movie {
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
         id: json['id'] as int,
-        title: ['title'] as String,
-        posterPath: ['posted_path'] as String,
-        releaseDate: ['release_date'] as String,
-        voteAverage: ['vote_average'] as double,
-        overview: ['overview'] as String);
+        title: json['title'] as String,
+        posterPath: json['poster_path'] as String,
+        releaseDate: json['release_date'] as String,
+        voteAverage: json['vote_average'] as num,
+        overview: json['overview'] as String);
   }
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "title": title,
-    "posted_path": posterPath,
+    "poster_path": posterPath,
     "release_date": releaseDate,
     "vote_average": voteAverage,
     "overview": overview,
   };
-
   static List<MovieModel> popularMoviesFromSnapshot(List snapshot) {
     return snapshot.map((data) {
       return MovieModel.fromJson(data);

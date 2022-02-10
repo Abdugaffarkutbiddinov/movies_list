@@ -5,7 +5,7 @@ class Movie implements Equatable {
   final String title;
   final String posterPath;
   final String releaseDate;
-  final double voteAverage;
+  final num voteAverage;
   final String overview;
 
   Movie({

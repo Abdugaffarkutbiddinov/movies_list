@@ -1,4 +1,4 @@
-name: movies_list
+name: movies
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -29,6 +29,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get_it: ^7.2.0
+  flutter_bloc: ^8.0.0
+  equatable: ^2.0.3
+  dartz: ^0.10.1
+  shared_preferences: ^2.0.8
+  path_provider: ^2.0.8
+  data_connection_checker_tv: ^0.3.5-nullsafety
+  http: ^0.13.4
+
 
 
   # The following adds the Cupertino Icons font to your application.

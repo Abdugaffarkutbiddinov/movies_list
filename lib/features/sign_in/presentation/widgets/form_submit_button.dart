@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:movies/features/sign_in/presentation/widgets/custom_elevated_button.dart';
 
 
@@ -7,10 +8,11 @@ class FormSubmitButton extends CustomElevatedButton {
       : super(
       child: Text(
         text,
-        style: const TextStyle(color: Colors.white, fontSize: 20.0),
+        style: GoogleFonts.roboto(color: Colors.white, fontSize: 21.0, fontWeight: FontWeight.w400),
       ),
-      color: Colors.blueGrey,
-      height: 44,
+      color: Color(0xff333333),
+      height: 65,
+      width: 260,
       borderRadius: 4.0,
       onPressed: onPressed);
 }

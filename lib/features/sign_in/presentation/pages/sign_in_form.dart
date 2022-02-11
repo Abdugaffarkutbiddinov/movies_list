@@ -9,7 +9,7 @@ import '../../email_password_regex_validator.dart';
 import '../../validator.dart';
 import '../widgets/form_submit_button.dart';
 
-class SignInForm extends StatefulWidget with EmailAndPasswordValidators{
+class SignInForm extends StatefulWidget with EmailAndPasswordValidators {
   @override
   State<SignInForm> createState() => _SignInFormState();
 }
@@ -27,8 +27,6 @@ class _SignInFormState extends State<SignInForm> {
   String get _password => _passwordController.text;
 
   bool _submitted = false;
-
-
 
   void _submit() async {
     setState(() {
@@ -62,21 +60,25 @@ class _SignInFormState extends State<SignInForm> {
     bool submitEnabled = widget.emailSubmitRegexValidator.isValid(_email) &&
         widget.passwordSubmitRegexValidator.isValid(_password);
     return [
-      Text('Авторизация',style:  GoogleFonts.roboto(
-          fontSize: 34 ,
-          color: Colors.white,
-          fontWeight: FontWeight.w300),),
-      _buildEmailTextField(),
-      Expanded(
-        child: SizedBox(
+      Text(
+        'Авторизация',
+        style: GoogleFonts.roboto(
+            fontSize: 34, color: Colors.white, fontWeight: FontWeight.w300),
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 25.0),
+        child: Column(
+          children: [
+            _buildEmailTextField(),
+            _buildPasswordTextField(),
+          ],
         ),
       ),
-      _buildPasswordTextField(),
-      SizedBox(
-        height: 8.0,
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 40.0),
+        child: FormSubmitButton(
+            text: primaryText, onPressed: submitEnabled ? _submit : null),
       ),
-      FormSubmitButton(
-          text: primaryText, onPressed: submitEnabled ? _submit : null),
     ];
   }
 
@@ -84,9 +86,14 @@ class _SignInFormState extends State<SignInForm> {
     bool showErrorText =
         _submitted && !widget.passwordSubmitRegexValidator.isValid(_password);
     return TextField(
+      style: GoogleFonts.roboto(color: Colors.white),
       focusNode: _passwordFocusNode,
       controller: _passwordController,
       decoration: InputDecoration(
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+          ),
+          labelStyle: TextStyle(color: Colors.white),
           labelText: 'Password',
           errorText: showErrorText ? 'Enter at least 6 characters' : null),
       obscureText: true,
@@ -105,9 +112,14 @@ class _SignInFormState extends State<SignInForm> {
     bool showErrorText =
         _submitted && !widget.emailSubmitRegexValidator.isValid(_email);
     return TextField(
+      style: GoogleFonts.roboto(color: Colors.white),
       focusNode: _emailFocusNode,
       controller: _emailController,
       decoration: InputDecoration(
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+          ),
+          labelStyle: TextStyle(color: Colors.white),
           labelText: 'Email',
           hintText: 'test@test.com',
           errorText: showErrorText ? 'Email field invalid' : null),
@@ -126,12 +138,18 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: double.infinity,
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisSize: MainAxisSize.min,
-        children: _buildChildren(),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: _buildChildren()),
+          ),
+        ],
       ),
     );
   }

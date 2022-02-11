@@ -45,11 +45,5 @@ class ValidatorInputFormatter implements TextInputFormatter {
   }
 }
 
-class NonEmptyStringValidator implements StringValidator {
-  @override
-  bool isValid(String value) {
-    return value.isNotEmpty;
-  }
 
-}
 

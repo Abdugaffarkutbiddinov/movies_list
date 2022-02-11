@@ -37,6 +37,7 @@ dependencies:
   path_provider: ^2.0.8
   data_connection_checker_tv: ^0.3.5-nullsafety
   http: ^0.13.4
+  google_fonts: ^2.3.1
 
 
 

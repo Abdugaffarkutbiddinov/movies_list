@@ -11,13 +11,27 @@ class EmailEditingRegexValidator extends RegexValidator {
   EmailEditingRegexValidator()
       : super(
             regexSource:
-                "^[a-zA-Z0-9_.+-]*(@([a-zA-Z0-9-]*(\\.[a-zA-Z0-9-]*)?)?)?\$");
+                "^[a-zA-Z0-9_.+-]*(@([a-zA-Z0-9-]*(\\.[a-zA-Z0-9-]{0,4})?)?)?\$");
 }
 
 class EmailSubmitRegexValidator extends RegexValidator {
   EmailSubmitRegexValidator()
       : super(
-            regexSource: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-]+\$)");
+            regexSource: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-]{2,4}\$)");
+}
+
+class PasswordEditingRegexValidator extends RegexValidator {
+  PasswordEditingRegexValidator()
+      : super(
+            regexSource:
+                "^[a-zA-Z0-9]{0,10}\$");
+}
+
+class PasswordSubmitRegexValidator extends RegexValidator {
+  // TODO Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
+  PasswordSubmitRegexValidator()
+      : super(
+            regexSource: "^[a-zA-Z0-9_.+-]{6,10}\$");
 }
 
 class SignInForm extends StatefulWidget {
@@ -39,32 +53,28 @@ class _SignInFormState extends State<SignInForm> {
 
   bool _submitted = false;
 
-  // String _value = '';
-
   void _submit() async {
     setState(() {
       _submitted = true;
     });
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => BlocProvider.value(
-        value: sl<MovieBloc>(),
-        child: MovieListPage(),
-      ),
-    ));
+    bool valid = PasswordSubmitRegexValidator().isValid(_password);
+    if (valid) {
+      _passwordFocusNode.unfocus();
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: sl<MovieBloc>(),
+          child: MovieListPage(),
+        ),
+      ));
+      _emailController.clear();
+      _passwordController.clear();
+    } else {
+      FocusScope.of(context).requestFocus(_passwordFocusNode);
+    }
   }
 
-  // void _submit() async {
-  //   bool valid = EmailSubmitRegexValidator().isValid(_email);
-  //   if (valid) {
-  //     _emailFocusNode.unfocus();
-  //     // widget.onSubmit(_email);
-  //   } else {
-  //     FocusScope.of(context).requestFocus(_emailFocusNode);
-  //   }
-  // }
-
   void _emailEditingComplete() {
-    final newFocus = EmailEditingRegexValidator().isValid(_email)
+    final newFocus = EmailSubmitRegexValidator().isValid(_email)
         ? _passwordFocusNode
         : _emailFocusNode;
     FocusScope.of(context).requestFocus(newFocus);
@@ -72,11 +82,8 @@ class _SignInFormState extends State<SignInForm> {
 
   List<Widget> _buildChildren() {
     const primaryText = 'Sign in';
-
-    // bool submitEnabled = widget.emailValidator.isValid(_email) &&
-    //     widget.passwordValidator.isValid(_password);
     bool submitEnabled = EmailSubmitRegexValidator().isValid(_email) &&
-        NonEmptyStringValidator().isValid(_password);
+        PasswordSubmitRegexValidator().isValid(_password);
     return [
       _buildEmailTextField(),
       SizedBox(
@@ -93,22 +100,24 @@ class _SignInFormState extends State<SignInForm> {
 
   TextField _buildPasswordTextField() {
     bool showErrorText =
-        _submitted && !NonEmptyStringValidator().isValid(_password);
+        _submitted && !PasswordSubmitRegexValidator().isValid(_password);
     return TextField(
       focusNode: _passwordFocusNode,
       controller: _passwordController,
       decoration: InputDecoration(
           labelText: 'Password',
-          errorText: showErrorText ? 'Enter at least 6 digits' : null),
+          errorText: showErrorText ? 'Enter at least 6 characters' : null),
       obscureText: true,
       textInputAction: TextInputAction.done,
+      inputFormatters: [ValidatorInputFormatter(
+        editingValidator: PasswordEditingRegexValidator(),
+      ),],
       onEditingComplete: _submit,
       onChanged: (password) => _updateState(),
     );
   }
 
   TextField _buildEmailTextField() {
-    // bool showErrorText = _submitted && !widget.emailValidator.isValid(_email);
     bool showErrorText =
         _submitted && !EmailSubmitRegexValidator().isValid(_email);
     return TextField(
@@ -121,9 +130,11 @@ class _SignInFormState extends State<SignInForm> {
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
-      inputFormatters: [ValidatorInputFormatter(
-        editingValidator: EmailEditingRegexValidator(),
-      ),],
+      inputFormatters: [
+        ValidatorInputFormatter(
+          editingValidator: EmailEditingRegexValidator(),
+        ),
+      ],
       onEditingComplete: _emailEditingComplete,
       onChanged: (email) => _updateState(),
     );

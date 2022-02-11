@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies/features/movies/presentation/pages/movie_list_page.dart';
+import 'package:movies/features/sign_in/constants.dart';
 
 import '../../../../injection_container.dart';
 import '../../../movies/presentation/bloc/movie_bloc.dart';
@@ -63,7 +64,7 @@ class _SignInFormState extends State<SignInForm> {
       Text(
         'Авторизация',
         style: GoogleFonts.roboto(
-            fontSize: 34, color: Colors.white, fontWeight: FontWeight.w300),
+            fontSize: 34, color: CustomColors.primaryTextColor, fontWeight: FontWeight.w300),
       ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -86,14 +87,14 @@ class _SignInFormState extends State<SignInForm> {
     bool showErrorText =
         _submitted && !widget.passwordSubmitRegexValidator.isValid(_password);
     return TextField(
-      style: GoogleFonts.roboto(color: Colors.white),
+      style: GoogleFonts.roboto(color: CustomColors.primaryTextColor),
       focusNode: _passwordFocusNode,
       controller: _passwordController,
       decoration: InputDecoration(
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+          enabledBorder:  UnderlineInputBorder(
+            borderSide:  BorderSide(color: CustomColors.primaryTextColor, width: 0.0),
           ),
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: CustomColors.primaryTextColor),
           labelText: 'Password',
           errorText: showErrorText ? 'Enter at least 6 characters' : null),
       obscureText: true,
@@ -112,14 +113,14 @@ class _SignInFormState extends State<SignInForm> {
     bool showErrorText =
         _submitted && !widget.emailSubmitRegexValidator.isValid(_email);
     return TextField(
-      style: GoogleFonts.roboto(color: Colors.white),
+      style: GoogleFonts.roboto(color: CustomColors.primaryTextColor),
       focusNode: _emailFocusNode,
       controller: _emailController,
       decoration: InputDecoration(
-          enabledBorder: const UnderlineInputBorder(
-            borderSide: const BorderSide(color: Colors.white, width: 0.0),
+          enabledBorder:  UnderlineInputBorder(
+            borderSide:  BorderSide(color: CustomColors.primaryTextColor, width: 0.0),
           ),
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: CustomColors.primaryTextColor),
           labelText: 'Email',
           hintText: 'test@test.com',
           errorText: showErrorText ? 'Email field invalid' : null),

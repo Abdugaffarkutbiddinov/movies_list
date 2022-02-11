@@ -41,7 +41,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
           ),
         ),
       ),
-      appBar: buildAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -101,18 +100,4 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      leading: BackButton(
-        color: CustomColors.primaryTextColor,
-      ),
-      backgroundColor: CustomColors.appBarColor,
-      elevation: 0,
-      centerTitle: true,
-      title: Text(
-        "Movies",
-        style: TextStyle(color: CustomColors.primaryTextColor),
-      ),
-    );
-  }
 }

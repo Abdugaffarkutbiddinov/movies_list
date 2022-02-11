@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/features/sign_in/constants.dart';
 
 import 'sign_in_form.dart';
 
@@ -14,7 +15,7 @@ class SignInPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        backgroundColor: Color(0xff6657A1),
+        backgroundColor: CustomColors.backgroundColor,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

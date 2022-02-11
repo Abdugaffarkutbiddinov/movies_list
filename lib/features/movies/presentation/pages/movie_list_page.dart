@@ -34,14 +34,6 @@ class _MovieListPageState extends State<MovieListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.backgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: CustomColors.appBarColor,
-        title: Text(
-          'Main Strategies',
-          style: TextStyle(color: CustomColors.primaryTextColor),
-        ),
-      ),
       body: Container(
         child: _body(),
       ),
@@ -73,11 +65,8 @@ class _MovieListPageState extends State<MovieListPage> {
       child: ListView.builder(
           itemCount: movies == null ? 0 : movies.length,
           itemBuilder: (context, index) {
-            // BettingStrategyCard data = albums[index];
             return GestureDetector(
               onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => DetailsPage(strategy: albums[index]))
                 Navigator.push(
                   context,
                   PageRouteBuilder(
@@ -100,7 +89,7 @@ class _MovieListPageState extends State<MovieListPage> {
                   children: [
                     Container(
                       width: 100,
-                      height: 100,
+                      height: 130,
                       child: Image(
                         image: NetworkImage(movies[index].posterPath),
                       ),

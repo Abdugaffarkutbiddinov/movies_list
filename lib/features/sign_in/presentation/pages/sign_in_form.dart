@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/features/movies/presentation/pages/movie_list_page.dart';
 import 'package:movies/features/sign_in/validators.dart';
 
+import '../../../../injection_container.dart';
+import '../../../movies/presentation/bloc/movie_bloc.dart';
 import '../widgets/form_submit_button.dart';
 
 
@@ -29,6 +33,9 @@ class _SignInFormState extends State<SignInForm> {
     setState(() {
       _submitted = true;
     });
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => BlocProvider.value(value: sl<MovieBloc>(),child: MovieListPage(),),
+    ));
   }
 
   void _emailEditingComplete() {

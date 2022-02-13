@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies/features/movies/presentation/pages/movie_list_page.dart';
 import 'package:movies/features/sign_in/constants.dart';
+import 'package:movies/route_generator.dart';
 
 import '../../../../injection_container.dart';
 import '../../../movies/presentation/bloc/movie_bloc.dart';
@@ -36,12 +37,8 @@ class _SignInFormState extends State<SignInForm> {
     bool valid = widget.passwordSubmitRegexValidator.isValid(_password);
     if (valid) {
       _passwordFocusNode.unfocus();
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: sl<MovieBloc>(),
-          child: MovieListPage(),
-        ),
-      ));
+
+      Navigator.of(context).pushNamed(RouteGenerator.moviesList);
       _emailController.clear();
       _passwordController.clear();
     } else {
@@ -64,7 +61,9 @@ class _SignInFormState extends State<SignInForm> {
       Text(
         'Авторизация',
         style: GoogleFonts.roboto(
-            fontSize: 34, color: CustomColors.primaryTextColor, fontWeight: FontWeight.w300),
+            fontSize: 34,
+            color: CustomColors.primaryTextColor,
+            fontWeight: FontWeight.w300),
       ),
       Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.0),
@@ -91,8 +90,9 @@ class _SignInFormState extends State<SignInForm> {
       focusNode: _passwordFocusNode,
       controller: _passwordController,
       decoration: InputDecoration(
-          enabledBorder:  UnderlineInputBorder(
-            borderSide:  BorderSide(color: CustomColors.primaryTextColor, width: 0.0),
+          enabledBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: CustomColors.primaryTextColor, width: 0.0),
           ),
           labelStyle: TextStyle(color: CustomColors.primaryTextColor),
           labelText: 'Password',
@@ -117,8 +117,9 @@ class _SignInFormState extends State<SignInForm> {
       focusNode: _emailFocusNode,
       controller: _emailController,
       decoration: InputDecoration(
-          enabledBorder:  UnderlineInputBorder(
-            borderSide:  BorderSide(color: CustomColors.primaryTextColor, width: 0.0),
+          enabledBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: CustomColors.primaryTextColor, width: 0.0),
           ),
           labelStyle: TextStyle(color: CustomColors.primaryTextColor),
           labelText: 'Email',

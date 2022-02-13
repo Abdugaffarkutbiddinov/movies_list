@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/features/sign_in/presentation/pages/sign_page.dart';
+import 'package:movies/route_generator.dart';
 import 'injection_container.dart' as di;
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
     debugShowCheckedModeBanner: false,
-      home: SignInPage()
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute
     );
   }
 }

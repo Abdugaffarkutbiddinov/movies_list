@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/features/movies/domain/entities/movie.dart';
 import 'package:movies/features/movies/presentation/bloc/movie_bloc.dart';
 import 'package:movies/features/movies/presentation/widgets/loading_widget.dart';
+import 'package:movies/route_generator.dart';
 
 import '../constants.dart';
 import '../widgets/logout_icon.dart';
@@ -44,7 +45,8 @@ class _MovieListPageState extends State<MovieListPage> {
         children: [
           LogoutIcon(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
             },
           ),
           BlocBuilder<MovieBloc, MovieState>(
@@ -72,26 +74,13 @@ class _MovieListPageState extends State<MovieListPage> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: const Duration(milliseconds: 500),
-                    reverseTransitionDuration:
-                        const Duration(milliseconds: 500),
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        FadeTransition(
-                      opacity: animation,
-                      child: MovieDetailsPage(
-                        movie: movies[index],
-                      ),
-                    ),
-                  ),
-                );
+                Navigator.of(context).pushNamed(RouteGenerator.moviesDetails,
+                    arguments: movies[index]);
               },
               child: Card(
-              shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-              ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
                 color: CustomColors.boxColor,
                 child: Row(
                   children: [
@@ -108,14 +97,14 @@ class _MovieListPageState extends State<MovieListPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                              Text(
-                                movies[index].title,
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                            Text(
+                              movies[index].title,
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                             SizedBox(
                               height: 10.0,
@@ -131,16 +120,16 @@ class _MovieListPageState extends State<MovieListPage> {
                             SizedBox(
                               height: 20.0,
                             ),
-                                Container(
-                                  width: width,
-                                  child: Text(
-                                    movies[index].voteAverage.toString(),
-                                    style: TextStyle(
-                                        color: Colors.amber, fontSize: 15),
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              width: width,
+                              child: Text(
+                                movies[index].voteAverage.toString(),
+                                style: TextStyle(
+                                    color: Colors.amber, fontSize: 15),
+                              ),
                             ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

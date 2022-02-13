@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddButtonDetails extends StatelessWidget {
-  AddButtonDetails(
+class BackButtonDetails extends StatelessWidget {
+  BackButtonDetails(
       {required this.text,
       required this.onPressed,
       required this.backgroundColor,

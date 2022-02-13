@@ -16,13 +16,11 @@ class SignInPage extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: CustomColors.backgroundColor,
-        body: SingleChildScrollView(
-          child: Padding(
+        body:  Padding(
             padding: const EdgeInsets.all(16.0),
             child: SignInForm(),
           ),
         ),
-      ),
     );
   }
 }

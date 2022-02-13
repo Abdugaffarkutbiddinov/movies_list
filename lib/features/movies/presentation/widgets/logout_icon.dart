@@ -8,17 +8,19 @@ class LogoutIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Text(
-              'Выйти',
-              style: GoogleFonts.roboto(fontSize: 18.0, fontWeight:  FontWeight.bold),
-            ),
-            // icon-1
-            IconButton(
-                onPressed: onPressed, icon: Icon(Icons.logout_outlined,color: Colors.black,)),
-          ]),
+      trailing: InkWell(
+        onTap: onPressed,
+        child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text(
+                'Выйти',
+                style: GoogleFonts.roboto(fontSize: 18.0, fontWeight:  FontWeight.bold),
+              ),
+             SizedBox(width: 5,),
+             Icon(Icons.logout_outlined,color: Colors.black,),
+            ]),
+      ),
     );
   }
 }

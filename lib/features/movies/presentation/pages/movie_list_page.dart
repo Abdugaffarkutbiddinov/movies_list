@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/features/movies/domain/entities/movie.dart';
 import 'package:movies/features/movies/presentation/bloc/movie_bloc.dart';
 import 'package:movies/features/movies/presentation/widgets/loading_widget.dart';
@@ -9,7 +8,6 @@ import 'package:movies/route_generator.dart';
 import '../constants.dart';
 import '../widgets/logout_icon.dart';
 import '../widgets/message_display.dart';
-import 'movie_details_page.dart';
 
 class MovieListPage extends StatefulWidget {
   const MovieListPage({Key? key}) : super(key: key);
@@ -45,8 +43,8 @@ class _MovieListPageState extends State<MovieListPage> {
         children: [
           LogoutIcon(
             onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/', (Route<dynamic> route) => false);
             },
           ),
           BlocBuilder<MovieBloc, MovieState>(

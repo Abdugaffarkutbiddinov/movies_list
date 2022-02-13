@@ -28,9 +28,9 @@ class RouteGenerator {
       case moviesDetails:
         if(args is Movie) {
           return PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 500),
+            transitionDuration: const Duration(milliseconds: 1000),
             reverseTransitionDuration:
-            const Duration(milliseconds: 500),
+            const Duration(milliseconds: 1000),
             pageBuilder: (context, animation, secondaryAnimation) =>
                 FadeTransition(
                   opacity: animation,

@@ -1,5 +1,6 @@
 
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies/core/network/network_info.dart';
@@ -18,10 +19,11 @@ init() {
 
   sl.registerLazySingleton<MovieRepository>(() => MovieRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
-  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(dio: sl()));
 
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
-  sl.registerLazySingleton(() => http.Client());
+  // sl.registerLazySingleton(() => http.Client());
+  sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton(() => DataConnectionChecker());
 }

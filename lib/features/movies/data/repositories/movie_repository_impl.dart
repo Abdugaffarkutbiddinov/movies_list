@@ -18,7 +18,6 @@ class MovieRepositoryImpl implements MovieRepository {
     if(await networkInfo.isConnected) {
       try {
         final remoteMovieList = await remoteDataSource.getPopularMovieList();
-        print('This is $remoteMovieList');
         return Right(remoteMovieList);
       } on ServerException {
         return Left(ServerFailure());

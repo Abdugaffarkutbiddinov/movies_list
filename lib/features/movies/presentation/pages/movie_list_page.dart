@@ -7,7 +7,7 @@ import 'package:movies/route_generator.dart';
 
 import '../constants.dart';
 import '../widgets/logout_icon.dart';
-import '../widgets/message_display.dart';
+import '../widgets/error_message_display.dart';
 
 class MovieListPage extends StatefulWidget {
   const MovieListPage({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _MovieListPageState extends State<MovieListPage> {
           BlocBuilder<MovieBloc, MovieState>(
               builder: (BuildContext context, MovieState state) {
             if (state is Error) {
-              return MessageDisplay(message: state.message);
+              return ErrorMessageDisplay(message: state.message);
             }
             if (state is Loaded) {
               List<Movie> movies = state.movieList;

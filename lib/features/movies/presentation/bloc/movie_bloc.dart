@@ -13,6 +13,7 @@ part 'movie_event.dart';
 part 'movie_state.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
+const String CONNECTION_FAILURE_MESSAGE = 'No Internet Connection';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
   final GetPopularMoviesList getPopularMovies;
@@ -36,6 +37,8 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     switch (failure.runtimeType) {
       case ServerFailure:
         return SERVER_FAILURE_MESSAGE;
+      case NoConnectionFailure:
+        return CONNECTION_FAILURE_MESSAGE;
       default:
         return 'Unexpected Error';
     }

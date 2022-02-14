@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MessageDisplay extends StatelessWidget {
+class ErrorMessageDisplay extends StatelessWidget {
   final String message;
 
-  MessageDisplay({
+  ErrorMessageDisplay({
     required this.message,
   });
 

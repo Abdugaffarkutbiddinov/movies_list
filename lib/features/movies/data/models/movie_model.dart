@@ -35,16 +35,11 @@ class MovieModel extends Movie {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "poster_path": posterPath,
-    "release_date": releaseDate,
-    "vote_average": voteAverage,
-    "overview": overview,
-  };
-  static List<MovieModel> popularMoviesFromSnapshot(List snapshot) {
-    return snapshot.map((data) {
-      return MovieModel.fromJson(data);
-    }).toList();
-  }
+        "id": id,
+        "title": title,
+        "poster_path": posterPath,
+        "release_date": releaseDate,
+        "vote_average": voteAverage,
+        "overview": overview,
+      };
 }

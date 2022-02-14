@@ -1,16 +1,14 @@
-import 'dart:convert';
+
 
 import 'package:dio/dio.dart';
 import 'package:movies/core/error/exceptions.dart';
 import 'package:movies/features/movies/data/models/movie_model.dart';
-import 'package:http/http.dart' as http;
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getPopularMovieList();
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  // final http.Client client;
   final Dio dio;
 
   MovieRemoteDataSourceImpl({required this.dio});
